@@ -46,54 +46,22 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
 
 class Solution:
     def intToRoman(self, num: int) -> str:
-        # N = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
-        # n = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
         if num not in range(1, 4000):
             return ""
+        N = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
+        n = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
         ls = []
-        while num > 0:
-            if num in range(1000, 4000):
-                ls.append("M")
-                num -= 1000
-            elif num in range(900, 1000):
-                ls.append("CM")
-                num -= 900
-            elif num in range(500, 900):
-                ls.append("D")
-                num -= 500
-            elif num in range(400, 500):
-                ls.append("CD")
-                num -= 400
-            elif num in range(100, 400):
-                ls.append("C")
-                num -= 100
-            elif num in range(90, 100):
-                ls.append("XC")
-                num -= 90
-            elif num in range(50, 90):
-                ls.append("L")
-                num -= 50
-            elif num in range(40, 50):
-                ls.append("XL")
-                num -= 40
-            elif num in range(10, 40):
-                ls.append("X")
-                num -= 10
-            elif num in range(9, 10):
-                ls.append("IX")
-                num -= 9
-            elif num in range(5, 9):
-                ls.append("V")
-                num -= 5
-            elif num in range(4, 5):
-                ls.append("IV")
-                num -= 4
-            elif num in range(1, 4):
-                ls.append("I")
-                num -= 1
+        for i, nn in enumerate(n):
+            while num > 0:
+                if num >= nn:
+                    ls.append(N[i])
+                    num -= nn
+                    continue
+                break
+
         return "".join(ls)
 
 
 if __name__ == "__main__":
     S = Solution()
-    print(S.intToRoman(3994))
+    print(S.intToRoman(1994))
